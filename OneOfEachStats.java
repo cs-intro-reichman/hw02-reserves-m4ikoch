@@ -10,7 +10,7 @@ import java.util.Random;
 public class OneOfEachStats {
 	public static void main (String[] args) {
 		// Gets the two command-line arguments
-		int T = Integer.parseInt(args[0]);
+		double couples = Double.parseDouble(args[0]);
 		int seed = Integer.parseInt(args[1]);
 		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);  
@@ -24,6 +24,77 @@ public class OneOfEachStats {
 		//// just like you had in the previous version, except that the 
 		//// randomization will be based on the given seed.
 		//// This is the only change that you have to do in the program.
+		int childrenCount = 0;
+		int twoChildren = 0;
+		int threeChildren = 0;
+		int fourPlus = 0;
+	for (int i = 0 ; i < couples ; i++){
+		int localCount = 2;
+		String Gender1;
+		String Gender2;
+		double random1= generator.nextDouble(); //getting a number between 0 to 1 
+			if (random1<0.5){
+				Gender1 = Double.toString (random1);
+				Gender1="g";
+			} 
+			else{
+				Gender1 = Double.toString (random1);
+				Gender1="b";
+			} 
+			// System.out.print(Gender1 + " ");
+			double random2= generator.nextDouble();
+			if (random2<0.5){
+				Gender2 = Double.toString (random2);
+				Gender2="g";
+			} 
+			else{
+				Gender2 = Double.toString (random2);
+				Gender2="b";
+			} 
+			childrenCount = childrenCount + 2;
+			// System.out.print(Gender2 + " ");
+			while (Gender1 == Gender2){
+				childrenCount++; 
+				localCount++;
+				Gender1=Gender2;
+				random2= generator.nextDouble();
+				if (random2<0.5){
+					Gender2 = Double.toString (random2);
+					Gender2="g";
+				} 
+				else{
+					Gender2 = Double.toString (random2);
+					Gender2="b";
+				} 
+				// System.out.print(Gender2 + " ");
+			}
+			if (localCount == 2 ){
+				twoChildren++;
+			}
+			if ( localCount == 3 ){
+				threeChildren++;
+			}
+			if (localCount >= 4){
+				fourPlus++;
+			}
+		}
+			System.out.println();
+			System.out.println("Average: " + childrenCount/couples + " children to get at least one of each gender.");
+			System.out.println("Number of families with 2 children: " + twoChildren);
+			System.out.println("Number of families with 3 children: " + threeChildren);
+			System.out.println("Number of families with 4 or more children: " + fourPlus);
+			if (twoChildren > threeChildren && twoChildren > fourPlus){
+				System.out.println("The most common number of children is 2." );
+	
+			}
+			if (threeChildren > twoChildren && threeChildren > fourPlus){
+				System.out.println("The most common number of children is 3." );
+	
+			}
+			if (fourPlus > twoChildren && fourPlus > threeChildren){
+				System.out.println("The most common number of children is 4 or more." );
+	
+			}
+   }
 		    
-	}
 }
